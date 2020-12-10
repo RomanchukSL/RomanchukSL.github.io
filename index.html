@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ua">
+<head>
+<title>
+	test safari
+</title>
+ <meta charset="UTF-8">
+	
+<body>
+
+	<h1 id="header">PROCESSING</h1>
+
+
+ <script type="text/javascript">
+  
+	  function getBrowserVer() {
+		var ua = navigator.userAgent, tem,
+			M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+		if (/trident/i.test(M[1])) {
+			tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+			return { name: 'msie', version: (tem[1] || '') };
+		}
+		if (M[1] === 'Chrome') {
+			tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+			if (tem != null) return { name: tem[1].replace('OPR', 'Opera'), version: tem[2] };
+		}
+
+		if (M[1] === 'Safari' && navigator.vendor.match(/apple/i !== null)) {
+			return { name: 'Safari', version: tem[2] };
+		}
+		M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+		if ((tem = ua.match(/version\/(\d+)/i)) != null)
+			M.splice(1, 1, tem[1]);
+		return { name: M[0], version: M[1] };
+	}
+	
+	var brows = getBrowserVer(), msg = '';
+	if(brows.name === "Safari")
+		msg = 'Романчук С.Л. молодець - юзає Safari з запахом яблука, version ' + brows.version;
+	else {
+		msg = 'Романчук С.Л. не молодець - юзає браузер ' +   brows.name + ' version '  + brows.version;
+	}
+	
+	var h = document.getElementById("header");
+	h.innerText = msg;
+	alert(msg);
+  </script>
+</body>
+</html>
